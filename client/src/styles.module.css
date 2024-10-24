@@ -1,0 +1,152 @@
+@font-face {
+  font-family: "ColfaxAI";
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2) format("woff2"),
+    url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ColfaxAI";
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
+    url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #80deea);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+header {
+  margin-top: 20px;
+}
+
+.main {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 50px;
+  margin: 20px auto;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.main .icon {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.main h3 {
+  font-size: 42px;
+  font-weight: bold;
+  color: #1e293b;
+  margin-bottom: 30px;
+}
+
+.main form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.main input[type="text"] {
+  width: 100%;
+  max-width: 500px;
+  padding: 15px;
+  border: 2px solid #10a37f;
+  border-radius: 8px;
+  outline-color: #10a37f;
+  transition: all 0.3s ease;
+  animation: slideIn 1s ease-in-out;
+}
+
+.main input[type="text"]:focus {
+  box-shadow: 0 0 10px rgba(16, 163, 127, 0.3);
+}
+
+.main input[type="submit"] {
+  padding: 14px 40px;
+  color: #fff;
+  background: linear-gradient(90deg, #10a37f, #0d8965);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.main input[type="submit"]:hover {
+  background: linear-gradient(90deg, #0d8965, #10a37f);
+  transform: scale(1.05);
+}
+
+.result-container {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.result-box {
+  padding: 20px;
+  background: #f1f5f9;
+  border-left: 4px solid #10a37f;
+  border-radius: 6px;
+  font-family: monospace;
+  color: #1e293b;
+  line-height: 1.5;
+  text-align: left;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.footer {
+  margin-bottom: 20px;
+  color: #1e293b;
+  font-size: 14px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
