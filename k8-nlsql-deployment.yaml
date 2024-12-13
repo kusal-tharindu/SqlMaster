@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nlsql-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nlsql-server
+  template:
+    metadata:
+      labels:
+        app: nlsql-server
+    spec:
+      containers:
+      - name: nlsql-server
+        image: jonemark226/nlsql-server:02
+        ports:
+        - containerPort: 3002
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nlsql-server-service
+spec:
+  selector:
+    app: nlsql-server
+  ports:
+  - protocol: TCP
+    port: 3002
+    targetPort: 3002
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nlsql-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nlsql-client
+  template:
+    metadata:
+      labels:
+        app: nlsql-client
+    spec:
+      containers:
+      - name: nlsql-client
+        image: jonemark226/nlsql-client:02
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nlsql-client-service
+spec:
+  selector:
+    app: nlsql-client
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
