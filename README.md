@@ -31,8 +31,8 @@ Follow these steps to clone the repository, install dependencies, and run the ap
 ### 1️⃣ **Clone the Repository**
 
 ```bash
-git clone https://github.com/your-username/natural-language-sql-converter.git
-cd natural-language-sql-converter
+git clone https://github.com/kusal-tharindu/SqlMaster.git
+cd SqlMaster
 ```
 
 ### 2️⃣ **Install Dependencies**
