@@ -1,7 +1,18 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: backend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: frontend
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nlsql-server
+  namespace: backend
 spec:
   replicas: 1
   selector:
@@ -14,7 +25,7 @@ spec:
     spec:
       containers:
       - name: nlsql-server
-        image: jonemark226/nlsql-server:02
+        image: jonemark226/nlsql-server:03
         ports:
         - containerPort: 3002
         resources:
@@ -29,6 +40,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nlsql-server-service
+  namespace: backend
 spec:
   selector:
     app: nlsql-server
@@ -36,12 +48,14 @@ spec:
   - protocol: TCP
     port: 3002
     targetPort: 3002
-  type: ClusterIP
+    nodePort: 32002  # Exposing backend via NodePort
+  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nlsql-client
+  namespace: frontend
 spec:
   replicas: 1
   selector:
@@ -54,9 +68,12 @@ spec:
     spec:
       containers:
       - name: nlsql-client
-        image: jonemark226/nlsql-client:02
+        image: jonemark226/nlsql-client:03
         ports:
         - containerPort: 80
+        env:
+        - name: BACKEND_URL
+          value: "http://54.208.243.56:32002/generate"  # Correct backend URL
         resources:
           requests:
             memory: "128Mi"
@@ -69,6 +86,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nlsql-client-service
+  namespace: frontend
 spec:
   selector:
     app: nlsql-client
@@ -76,4 +94,5 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 80
-  type: LoadBalancer
+    nodePort: 32080  # Exposing frontend via NodePort
+  type: NodePort
